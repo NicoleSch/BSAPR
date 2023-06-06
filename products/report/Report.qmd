@@ -1,7 +1,7 @@
 ---
 title: "Report Ebola"
 author: "Nicole Schönenberger"
-date: "`r date()"
+date: "heute"
 format:
   html:
     toc: true
