@@ -1,0 +1,75 @@
+---
+title: "Report on association of systolic blood pressure and death with data from the Framingham study"
+author: "Nicole Schönenberger"
+date: "`r date()`"
+format:
+  html:
+    self-contained: true
+    code-link: true
+    code-fold: true
+    code-summary: "Code"
+    toc: true
+    df-print: paged
+    embed-resources: true
+---
+
+## Introduction
+
+This short report studies the  systolic blood pressure in the dataset of the Framingham study and its association with death. The Framingham data can be obtained from the RiskCommunicator package of R. Details of this package can be found in:  <https://cran.r-project.org/web/packages/riskCommunicator/index.html>.
+In this analysis, only the baseline data (timepoint = 0) is used. 
+
+## Data import, setting working directory, and loading libraries
+In a first step, data is imported and only the baseline data is selected. Additionally, libraries are loaded and the working directory is set.
+
+```{r}
+#| output: false
+# Working directory
+setwd("~/BSAPR Assessment")
+
+# Loading packages
+library(riskCommunicator)
+library(tidyverse)
+
+# Framingham heart study data
+framData <- riskCommunicator::framingham
+
+# We keep only the baseline data
+framData_base <- subset(framData, TIME == 0)
+
+```
+
+## Descriptive statistics
+
+In this section, the descriptive statistics of the sample systolic blood pressure is calculated. This includes sample mean, median, quartiles, sample variance, sample standard deviation, range, interquartile range (IQR).
+
+```{r}
+# Calculating the mean
+mean_bp <- mean(framData_base$SYSBP, na.rm = TRUE)
+mean_bp
+
+# Calculating the median
+median_bp <- median(framData_base$SYSBP, na.rm = TRUE)
+median_bp
+
+# Calculating quartiles
+quart_bp <- quantile(framData_base$SYSBP, probs = c(0.25, 0.5, 0.75), na.rm = TRUE)
+quart_bp
+
+# Calculating sample variance
+var(framData_base$SYSBP, na.rm = TRUE)
+
+# Calculating standard deviation
+sd_bp <- sd(framData_base$SYSBP, na.rm = TRUE)
+sd_bp 
+
+# Range of systolic blood pressure
+range(framData_base$SYSBP, na.rm = TRUE)
+
+# Calculating interquartile range
+IQR(framData_base$SYSBP, na.rm = TRUE)
+
+# Summary of descriptive statistics
+summary(framData_base$SYSBP)
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
